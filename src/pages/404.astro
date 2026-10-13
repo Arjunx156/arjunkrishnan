@@ -1,0 +1,68 @@
+---
+import Header from "../components/Header.astro";
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Not found, Arjun Krishnan Suresh" description="This page doesn't exist." noindex>
+  <Header />
+  <main class="lost" data-hero-surface data-word="404">
+    <canvas class="stage" data-hero aria-hidden="true"></canvas>
+    <div class="say">
+      <h1><span class="sr-only">Error 404. </span>Nothing resolves here.</h1>
+      <p>Whatever was at this address has moved, or never existed. Scatter the noise if you like, then head back.</p>
+      <a class="home link" href="/">Back to the front page</a>
+    </div>
+  </main>
+</Base>
+
+<script>
+  import "../scripts/main";
+</script>
+
+<style>
+  .lost {
+    position: relative;
+    height: 100svh;
+    min-height: 560px;
+    overflow: hidden;
+    display: grid;
+    align-content: end;
+    padding: 0 var(--gutter) clamp(24px, 4vw, 56px);
+    cursor: crosshair;
+  }
+
+  .stage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .say {
+    position: relative;
+    display: grid;
+    gap: 14px;
+    justify-items: start;
+    max-width: 34rem;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  h1 {
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 800;
+    font-stretch: 75%;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+
+  .home {
+    font-weight: 560;
+  }
+</style>

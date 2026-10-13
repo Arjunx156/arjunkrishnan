@@ -1,0 +1,26 @@
+{
+  "name": "arjun-krishnan-portfolio",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "author": "Arjun Krishnan Suresh",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@biomejs/biome": "^2.5.15",
+    "@types/bun": "^1.4.3",
+    "typescript": "^6"
+  }
+}

@@ -1,0 +1,143 @@
+---
+const facts = [
+  {
+    term: "Studying",
+    detail:
+      "B.Tech, Artificial Intelligence and Data Science. Amrita Vishwa Vidyapeetham, Faridabad, 2024 to 2028. CGPA 8.32.",
+  },
+  {
+    term: "Coursework",
+    detail:
+      "Deep learning, cryptography and network security, convex optimisation, statistical estimation, computer networks, databases.",
+  },
+  {
+    term: "Leading",
+    detail:
+      "Secretary, Amrita Council of Sports and Excellence. Started Respawn Rush, a campus esports tournament: 11 teams, 44 players, INR 10,000 in sponsorship.",
+  },
+  { term: "Playing", detail: "Badminton. Third place for Amrita at an inter-collegiate tournament in Chennai." },
+  {
+    term: "Certified",
+    detail:
+      "Oracle Cloud Infrastructure 2025 AI Foundations Associate. Google Cloud Gen AI Academy APAC 2026. Infosys Springboard Python and AI primer.",
+  },
+  {
+    term: "Tools",
+    detail:
+      "Python, TypeScript, C++, SQL, MATLAB. LangGraph, FastAPI, TensorFlow, ChromaDB, Postgres, Redis, Next.js, Docker.",
+  },
+  { term: "Speaking", detail: "Malayalam at home, English and Hindi everywhere else." },
+];
+---
+
+<section id="about" class="about wrap" aria-labelledby="about-title" data-scene="dust">
+  <div class="head mono">
+    <h2 id="about-title">About</h2>
+    <p>Faridabad, India</p>
+  </div>
+
+  <div class="grid">
+    <div class="intro">
+      <p class="big" data-reveal>
+        I'm a B.Tech student at Amrita who likes seeing the whole stack, from a loss curve to a WebSocket frame.
+      </p>
+      <p class="small">
+        Most weeks go to LLM systems and the research that keeps them honest. The rest goes to the sports council,
+        where I'm secretary, and to badminton.
+      </p>
+    </div>
+
+    <dl class="facts">
+      {
+        facts.map((f) => (
+          <div>
+            <dt class="mono">{f.term}</dt>
+            <dd>{f.detail}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .about {
+    padding-bottom: var(--section);
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 16px;
+    border-top: 1px solid var(--fg);
+    color: var(--muted);
+  }
+
+  .head h2 {
+    font: inherit;
+    color: var(--fg);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 56px;
+    margin-top: clamp(48px, 6vw, 96px);
+  }
+
+  .intro {
+    grid-column: 1 / span 6;
+  }
+
+  .big {
+    font-size: clamp(28px, 2.9vw, 48px);
+    font-weight: 520;
+    line-height: 1.1;
+    letter-spacing: -0.022em;
+    text-wrap: pretty;
+  }
+
+  .small {
+    margin-top: 28px;
+    max-width: 52ch;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+
+  .facts {
+    grid-column: 8 / -1;
+    border-top: 1px solid var(--line);
+  }
+
+  .facts div {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 16px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  dt {
+    color: var(--muted);
+    padding-top: 0.2em;
+  }
+
+  dd {
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 960px) {
+    .intro,
+    .facts {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .facts div {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+</style>

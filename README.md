@@ -1,72 +1,26 @@
-<div align="center">
-  <img src="./assets/profile_image.png" alt="Pixel-art hands reaching toward a project window" width="100%" />
-</div>
+# Arjun Krishnan
 
-<br />
+My portfolio is one particle world. Up to 65,536 particles, simulated live on the GPU, sit behind the whole page and become something new in every section. They spell *Arjun* in nine scripts, speak it as a waveform, drift out into a galaxy, wrap into a voice-rippled globe, settle into a loss landscape with a glowing descent path, tie into a trefoil knot, and close by saying *hello* (നമസ്കാരം, नमस्ते, வணக்கம், …). Move through them and they swirl around the cursor; click and they shockwave into the next language. There's an optional sound layer, synthesised live, that hums with the particles and chimes on every new script.
 
-<table>
-  <tr>
-    <td align="center" colspan="2">
-      <a href="https://portfolio-chi-beryl-27.vercel.app/"><strong>PORTFOLIO</strong></a>
-      &nbsp;&nbsp;&nbsp;
-      <a href="https://linkedin.com/in/arjunkrishnansuresh"><strong>LINKEDIN</strong></a>
-      &nbsp;&nbsp;&nbsp;
-      <a href="https://github.com/Arjunx156"><strong>GITHUB</strong></a>
-    </td>
-  </tr>
-  <tr>
-    <td width="66%" valign="middle">
-      <h1>Hey there! I'm Arjun.</h1>
-      <p><strong>AI / Full-Stack Engineer</strong></p>
-      <p>I build useful software around voice, retrieval, and agentic systems.</p>
-      <p>Currently turning language into interfaces, workflows, and products that feel human to use.</p>
-    </td>
-    <td width="34%" align="center" valign="middle">
-      <img src="./assets/image.png" alt="Pixel-art astronaut portrait" width="190" />
-    </td>
-  </tr>
-</table>
+## Quick start
 
-<br />
+```sh
+bun install
+just dev        # http://localhost:4321
+just check      # lint, types, tests
+```
 
-## Pinned
+## How it works
 
-<table>
-  <tr>
-    <td width="33%" valign="top">
-      <h3>VoiceCare AI</h3>
-      <p>Multilingual voice support with a 9-agent LangGraph pipeline for 9 Indian languages.</p>
-      <p><code>Python</code> <code>FastAPI</code> <code>Next.js</code></p>
-      <a href="https://frontend-roan-three-65.vercel.app/">Live demo</a> · <a href="https://github.com/Arjunx156/VoiceCare-AI">Source</a>
-    </td>
-    <td width="33%" valign="top">
-      <h3>Schema Compiler</h3>
-      <p>Plain English transformed into validated, execution-ready app specifications.</p>
-      <p><code>Gemini</code> <code>Pydantic</code> <code>SSE</code></p>
-      <a href="https://nl-app-compiler.vercel.app/">Live demo</a> · <a href="https://github.com/Arjunx156/nl-app-compiler">Source</a>
-    </td>
-    <td width="33%" valign="top">
-      <h3>Production RAG</h3>
-      <p>Hybrid retrieval with reranking, citations, memory, and an OpenAI/Ollama switch.</p>
-      <p><code>ChromaDB</code> <code>Docker</code> <code>Streamlit</code></p>
-      <a href="https://arjunx156.github.io/rag-system">Docs</a> · <a href="https://github.com/Arjunx156/rag-system">Source</a>
-    </td>
-  </tr>
-</table>
+It's a static Astro site with no framework runtime: about 65 KB of script, self-hosted fonts, and nothing from a third party.
 
-<br />
+- **Simulation.** `src/scripts/stage/` keeps every particle's position and velocity in float textures and steps them in a fragment shader. Each step applies a spring toward the current scene's shape, curl-noise currents, pointer push, swirl and drag, a click impulse, and scroll shear. Shapes are computed in the shader (waveform, ring globe, landscape, knot, galaxy, dust); glyphs come from a texture.
+- **Rendering.** The particles are drawn as points with depth of field, they flare vermilion when they move fast, and they leave motion trails that hold brightness steady. A bloom pass, a soft tone curve, grain and a vignette finish the image. On light theme the same image is subtracted from paper, so it reads as ink.
+- **Scenes.** Every section carries a `data-scene`; whichever one crosses the middle of the screen decides what the particles become, and shapes ride along with their section as you scroll.
+- **Glyphs.** Words are drawn to a canvas and sampled; 40% of the particles always trace edges, which keeps letters crisp. The Indic fonts are Noto Sans cut down to the glyphs of two words, about 4 KB each (`tools/name_fonts.py`).
+- **Figures.** `src/scripts/figures/` holds six canvas motion graphics, one per project, built from the real numbers. The RAG figure runs Reciprocal Rank Fusion, and the ABMP figure computes its rolling 3σ band from the samples it draws.
+- **Restraint.** Shaders compile off the main thread; GPU-less machines get fewer particles at 30 fps; a lost context removes the canvas cleanly; browsers without WebGL2 get a lighter hero. With `prefers-reduced-motion` the physics settles off screen and each scene shows one still frame. Every loop has a Pause control.
 
-<div align="center">
-  <code>Python</code> · <code>TypeScript</code> · <code>LangGraph</code> · <code>RAG</code> · <code>FastAPI</code> · <code>Next.js</code> · <code>Docker</code>
-</div>
+All copy and numbers live in `src/data/`. Change `SITE_URL` in `src/data/site.ts` when the domain changes.
 
-<br />
-
-<p align="center"><strong>Building quietly. Open to good problems.</strong><br />
-<a href="https://linkedin.com/in/arjunkrishnansuresh">Say hello</a></p>
-
-<br />
-
-<div align="center">
-  <sub>Designed and built by Arjun Krishnan · 2026</sub>
-</div>
+Engineered by Arjun Krishnan Suresh.

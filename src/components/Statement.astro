@@ -1,0 +1,55 @@
+---
+const text =
+  "I'm Arjun. I study AI and data science at Amrita, and I like the parts of machine learning you can check. Nine agents that answer a customer in their own language inside ten seconds. A retriever pushed from 68% to 84% Precision@5. A key exchange I broke on purpose, then fixed. If it works, there's a number. If it doesn't, that goes in the paper too.";
+const words = text.split(" ");
+---
+
+<section class="statement wrap" aria-label="Introduction" data-scene="galaxy">
+  <p>
+    {
+      words.map((w) => (
+        <>
+          <span class="w">{w}</span>{" "}
+        </>
+      ))
+    }
+  </p>
+</section>
+
+<style>
+  .statement {
+    padding-block: var(--section);
+  }
+
+  p {
+    max-width: 19em;
+    font-size: clamp(28px, 3.7vw, 60px);
+    font-weight: 520;
+    line-height: 1.1;
+    letter-spacing: -0.022em;
+    text-wrap: pretty;
+  }
+
+  /* Each word brightens as it crosses the viewport. Muted already passes AA, so nothing is unreadable. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .w {
+        display: inline-block;
+        color: var(--muted);
+        animation: lit linear both;
+      }
+
+      /* Separate, more specific rule: minifiers fold a same-rule timeline into the shorthand, which Chrome rejects. */
+      p .w {
+        animation-timeline: view();
+        animation-range: entry 90% cover 42%;
+      }
+    }
+  }
+
+  @keyframes lit {
+    to {
+      color: var(--fg);
+    }
+  }
+</style>

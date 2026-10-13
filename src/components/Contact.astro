@@ -1,0 +1,250 @@
+---
+import { site } from "../data/site";
+import { SCRIPTS } from "../scripts/hero/glyphs";
+
+const total = String(SCRIPTS.length).padStart(2, "0");
+
+const elsewhere = [
+  { label: "GitHub", href: site.links.github, external: true },
+  { label: "LinkedIn", href: site.links.linkedin, external: true },
+  { label: "Résumé (PDF)", href: site.resume, external: false },
+];
+---
+
+<section id="contact" class="contact wrap" aria-labelledby="contact-title">
+  <div class="greet" data-scene="hello">
+    <p class="sr-only">Behind this, the particles say hello in {SCRIPTS.length} scripts.</p>
+    <div class="hud">
+      <p class="now mono" aria-hidden="true">
+        <span class="index"><span data-hello-index>01</span>/{total}</span>
+        <span data-hello-lang>English</span>
+        <span class="native" data-hello-native>Hello</span>
+      </p>
+      <div class="controls mono">
+        <button type="button" data-next>Next script</button>
+        <button type="button" data-pause aria-pressed="false">Pause</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="head mono">
+    <h2 id="contact-title">Contact</h2>
+    <p>IST, UTC+5:30</p>
+  </div>
+
+  <p class="note">
+    Looking for an internship in AI research, model evaluation or security. If your team cares whether the model is
+    actually right, I'd love to hear from you.
+  </p>
+
+  <a class="write" href={`mailto:${site.email}`} data-reveal>Write to me.</a>
+
+  <div class="rows">
+    <div class="row">
+      <span class="mono label">Email</span>
+      <span class="address" data-address>{site.email}</span>
+      <button class="copy mono" type="button" data-copy>Copy address</button>
+      <span class="sr-only" role="status" data-copy-status></span>
+    </div>
+    <div class="row">
+      <span class="mono label">Elsewhere</span>
+      <ul class="elsewhere">
+        {
+          elsewhere.map((l) => (
+            <li>
+              <a class="link" href={l.href} {...(l.external ? { rel: "noopener", target: "_blank" } : {})}>
+                {l.label}
+                {l.external && <span class="sr-only"> (opens in a new tab)</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding-bottom: clamp(64px, 8vw, 120px);
+  }
+
+  /* An empty stage: the particles write "hello" here, in every script the name came in. */
+  .greet {
+    position: relative;
+    height: 78svh;
+    min-height: 460px;
+    display: grid;
+    align-items: start;
+  }
+
+  .hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .now {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+
+  .controls {
+    display: flex;
+    gap: 8px;
+  }
+
+  .controls button {
+    padding: 6px 12px;
+    white-space: nowrap;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    transition:
+      background-color var(--fast) var(--ease),
+      color var(--fast) var(--ease),
+      border-color var(--fast) var(--ease);
+  }
+
+  .controls button:hover {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+  }
+
+  .controls button[aria-pressed="true"] {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .index {
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .index span {
+    color: var(--accent);
+  }
+
+  @media (max-width: 520px) {
+    .native {
+      display: none;
+    }
+
+    .controls button {
+      padding: 6px 9px;
+    }
+  }
+
+  .native {
+    font-family:
+      var(--sans), "Name Malayalam", "Name Devanagari", "Name Tamil", "Name Telugu", "Name Kannada", "Name Bengali",
+      "Name Gujarati", "Name Gurmukhi", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 16px;
+    border-top: 1px solid var(--fg);
+    color: var(--muted);
+  }
+
+  .head h2 {
+    font: inherit;
+    color: var(--fg);
+  }
+
+  .note {
+    max-width: 44ch;
+    margin-top: clamp(48px, 6vw, 96px);
+    font-size: clamp(18px, 1.4vw, 22px);
+    line-height: 1.4;
+    text-wrap: pretty;
+  }
+
+  .write {
+    display: inline-block;
+    margin-top: 24px;
+    margin-left: -0.04em;
+    padding-right: 0.06em;
+    font-size: clamp(64px, 14vw, 260px);
+    font-weight: 820;
+    font-stretch: 75%;
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    transition:
+      background-color var(--fast) var(--ease),
+      color var(--fast) var(--ease);
+  }
+
+  .write:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  .rows {
+    margin-top: clamp(40px, 5vw, 72px);
+    border-top: 1px solid var(--line);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 9rem auto 1fr;
+    align-items: baseline;
+    gap: 8px 24px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .label {
+    color: var(--muted);
+  }
+
+  .address {
+    overflow-wrap: anywhere;
+  }
+
+  .copy {
+    justify-self: start;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    transition:
+      background-color var(--fast) var(--ease),
+      color var(--fast) var(--ease),
+      border-color var(--fast) var(--ease);
+  }
+
+  .copy:hover {
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+  }
+
+  .copy:active {
+    transform: translateY(1px);
+  }
+
+  .elsewhere {
+    grid-column: 2 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    font-weight: 560;
+  }
+
+  @media (max-width: 640px) {
+    .row {
+      grid-template-columns: 1fr;
+    }
+
+    .elsewhere {
+      grid-column: 1;
+    }
+  }
+</style>
