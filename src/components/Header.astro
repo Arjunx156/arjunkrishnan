@@ -10,15 +10,15 @@ const nav = [
 // The favicon's dot-matrix A, which re-forms into a K on hover. Upper case = accent dot.
 const A = ["...A...", "..#.#..", "..#.#..", ".#...#.", ".#####.", "#.....#", "#.....#"];
 const K = [".#...K.", ".#..#..", ".#.#...", ".##....", ".#.#...", ".#..#..", ".#...K."];
-const STEP_MS = 28;
 
+// The stagger is a class per diagonal, not an inline style: the CSP hashes styles and blocks style="".
 const at = (rows: string[], x: number, y: number) => rows[y]?.[x] ?? ".";
 const dots = A.flatMap((row, y) =>
   [...row].map((_, x) => {
     const a = at(A, x, y);
     const k = at(K, x, y);
-    const cls = [a !== "." && "a", a === "A" && "a-hot", k !== "." && "k", k === "K" && "k-hot"].filter(Boolean);
-    return { cx: 2 + x * 2, cy: 2 + y * 2, cls: cls.join(" "), delay: (x + y) * STEP_MS };
+    const cls = [a !== "." && "a", a === "A" && "a-hot", k !== "." && "k", k === "K" && "k-hot", `d${x + y}`];
+    return { cx: 2 + x * 2, cy: 2 + y * 2, cls: cls.filter(Boolean).join(" ") };
   }),
 );
 ---
@@ -26,7 +26,7 @@ const dots = A.flatMap((row, y) =>
 <header class="header">
   <a class="mark" href="/" aria-label={`${site.shortName}, home`}>
     <svg class="glyph" viewBox="0 0 16 16" aria-hidden="true">
-      {dots.map((d) => <circle cx={d.cx} cy={d.cy} r="0.78" class={d.cls} style={`--d:${d.delay}ms`} />)}
+      {dots.map((d) => <circle cx={d.cx} cy={d.cy} r="0.78" class={d.cls} />)}
     </svg>
     <span class="word">Arjun<span class="surname"> Krishnan</span></span>
   </a>
@@ -67,14 +67,28 @@ const dots = A.flatMap((row, y) =>
     flex: none;
   }
 
-  /* Each dot fades between the two letters; --d staggers it along the diagonal. */
+  /* Each dot fades between the two letters, 28ms later per diagonal step. */
   .glyph circle {
+    --d: 0ms;
     fill: var(--dot);
     fill-opacity: 0.09;
     transition:
       fill-opacity 220ms var(--ease) var(--d),
       fill 220ms var(--ease) var(--d);
   }
+
+  .glyph .d1 { --d: 28ms; }
+  .glyph .d2 { --d: 56ms; }
+  .glyph .d3 { --d: 84ms; }
+  .glyph .d4 { --d: 112ms; }
+  .glyph .d5 { --d: 140ms; }
+  .glyph .d6 { --d: 168ms; }
+  .glyph .d7 { --d: 196ms; }
+  .glyph .d8 { --d: 224ms; }
+  .glyph .d9 { --d: 252ms; }
+  .glyph .d10 { --d: 280ms; }
+  .glyph .d11 { --d: 308ms; }
+  .glyph .d12 { --d: 336ms; }
 
   .glyph .a {
     fill-opacity: 1;
