@@ -7,7 +7,7 @@ export const site = {
   title: "Arjun Krishnan Suresh, AI engineer and researcher",
   description:
     "Arjun Krishnan Suresh builds AI systems that answer to numbers: multilingual voice agents, hybrid retrieval, deep-learning research and applied cryptography.",
-  email: "dl.ai.u4aid24107@dl.students.amrita.edu",
+  email: "4rjunkrishnan@gmail.com",
   city: "Faridabad, IN",
   timeZone: "Asia/Kolkata",
   resume: "/arjun-krishnan-resume.pdf",
